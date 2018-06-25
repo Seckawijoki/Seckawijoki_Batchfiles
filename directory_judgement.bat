@@ -1,5 +1,15 @@
 @echo off
-if exist f:\batchfiles\ (
-  echo The directory "f:\batchfiles" exists.
+
+for /f "delims=" %%i in ('dir /a/b/s *.bat') do (
+  pushd "%%i" 2>nul && ( call :folder "%%i" & popd ) || call :file "%%i"
 )
-pause 1>nil
+    pause
+goto :eof
+ 
+:file
+    echo %~1 is a file.
+goto :eof
+ 
+:folder
+    echo %~1 is a directory.
+goto :eof

@@ -7,4 +7,4 @@ cd %path%\..\
 set path2=f:\
 cd %path2%/batchfiles
 
-pause 1>nil
+pause

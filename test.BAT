@@ -1,0 +1,1 @@
+for /f "delims==" %%a in ('set') do if /i %%a neq path set %%a=
