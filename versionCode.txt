@@ -1,0 +1,4 @@
+
+---------- ANDROIDMANIFEST.XML
+    android:versionCode="5128"
+    android:versionName="0.20.8" >

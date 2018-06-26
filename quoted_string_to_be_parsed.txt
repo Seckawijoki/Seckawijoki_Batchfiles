@@ -1,0 +1,3 @@
+Unquoted is foobar 
+Quoted is "foobar" 
+myVar is still foobar or "foobar" 
