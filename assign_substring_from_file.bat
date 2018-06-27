@@ -15,7 +15,7 @@ for /f "skip=2 tokens=*" %%i in (%FILE%) do (
   echo %LINE%
   echo %LINE:~7,2%
   set SUBSTRING=%LINE:~7,2%
-  goto :substring_extraction_end
+  goto substring_extraction_end
 )
 :substring_extraction_end
 echo %SUBSTRING%
@@ -25,7 +25,7 @@ for /f "skip=5 tokens=*" %%i in (%FILE%) do (
   echo %LINE%
   echo %LINE:~7,2%
   set SUBSTRING=%LINE:~7,2%
-  goto :substring_extraction_end
+  goto substring_extraction_end
 )
 :substring_extraction_end
 echo %SUBSTRING%

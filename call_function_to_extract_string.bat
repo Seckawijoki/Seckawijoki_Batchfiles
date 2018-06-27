@@ -1,26 +1,28 @@
 @echo off
-set SUBSTRING=
-for /f %%i in ('dir /b *.bat') do (
-  set var=%%i
-  call :extract_string %%i
-  echo SUBSTRING : %SUBSTRING%
-  echo -------
-)
-pause
+:: Set the command "setlocal EnableDelayedExpansion" before set the global variable.
 
-:extract_string
-setlocal DisableDelayedExpansion
-set FILE=%~1
-echo FILE : %FILE%
-for /f "skip=2 tokens=*" %%i in (%FILE%) do (
-  set TEMP=%%i
+for /f %%i in ('dir /b *.bat') do (
   setlocal EnableDelayedExpansion
-  echo !TEMP!
-  set SUBSTRING=!TEMP:~1,4!
-  echo SUBSTRING : %SUBSTRING%
-  echo.
-  goto :extract_string_end
+  set SUBSTRING=
+  call :extract_string_start %%i 
+  echo SUBSTRING = !SUBSTRING!
+  echo -----------------
   endlocal
 )
-:extract_string_end
+
+:extract_string_start
+if "%~1" equ "" goto :eof
+set FILE=%~1
+echo FILE = !FILE!
+for /f "skip=2 tokens=*" %%i in (%FILE%) do (
+  set TEMP=%%i
+  if "!TEMP!" equ "" goto :eof
+  echo ORIGIN = !TEMP!
+  set SUBSTRING=!TEMP:~3,-3!
+  echo SUBSTRING = !SUBSTRING!
+  goto :eof
+  endlocal
+)
 goto :eof
+
+:end

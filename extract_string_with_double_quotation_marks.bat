@@ -16,9 +16,10 @@ for /f "skip=1 delims=" %%i in (%FILE%) do (
   set TEMP_LINE=%%i
   setlocal EnableDelayedExpansion
   echo !TEMP_LINE!
+:: This can be optimized by splitting the string.
   set SUB_STRING=!TEMP_LINE:~1,6!
   echo %SUB_STRING%
-  goto :substring_extraction_end0
+  goto substring_extraction_end0
   endlocal
 )
 :substring_extraction_end0
@@ -32,7 +33,7 @@ for /f "skip=2 delims=" %%i in (%FILE%) do (
   echo !TEMP_LINE!
   set SUB_STRING=!TEMP_LINE:~16,7!
   echo %SUB_STRING%
-  goto :substring_extraction_end1
+  goto substring_extraction_end1
   endlocal
 )
 :substring_extraction_end1
@@ -46,7 +47,7 @@ for /f "skip=3 delims=" %%i in (%FILE%) do (
   echo !TEMP_LINE!
   set SUB_STRING=!TEMP_LINE:~12,9!
   echo %SUB_STRING%
-  goto :substring_extraction_end2
+  goto substring_extraction_end2
   endlocal
 )
 :substring_extraction_end2
