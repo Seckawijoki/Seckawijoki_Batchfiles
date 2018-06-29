@@ -20,10 +20,10 @@ endlocal
 ::--------------------------------------------------------------- 
 :extract_version_code
 if "%~1" equ "" goto :eof 
-set ANDROID_MANIFEST_FILE=%~1
-echo ANDROID_MANIFEST_FILE = !ANDROID_MANIFEST_FILE!
+set SEARCHED_FILE=%~1
+echo SEARCHED_FILE = !SEARCHED_FILE!
 set SEARCH_RESULT_FILE=versionCode_and_versionName.txt
-find "android:versionCode" %ANDROID_MANIFEST_FILE% > !SEARCH_RESULT_FILE!
+find "android:versionCode" %SEARCHED_FILE% > !SEARCH_RESULT_FILE!
 for /f "skip=2 tokens=*" %%i in (%SEARCH_RESULT_FILE%) do (
   set TEMP_VERSION_CODE=%%i
   echo ORIGIN=!TEMP_VERSION_CODE!
@@ -42,10 +42,10 @@ goto :eof
 ::--------------------------------------------------------------- 
 :extract_version_name
 if "%~1" equ "" goto :eof 
-set ANDROID_MANIFEST_FILE=%~1
-echo ANDROID_MANIFEST_FILE = !ANDROID_MANIFEST_FILE!
+set SEARCHED_FILE=%~1
+echo SEARCHED_FILE = !SEARCHED_FILE!
 set SEARCH_RESULT_FILE=versionCode_and_versionName.txt
-find "android:versionName" %ANDROID_MANIFEST_FILE% > !SEARCH_RESULT_FILE!
+find "android:versionName" %SEARCHED_FILE% > !SEARCH_RESULT_FILE!
 for /f "skip=2 tokens=*" %%i in (%SEARCH_RESULT_FILE%) do (
   set TEMP_VERSION_NAME=%%i
   echo ORIGIN=!TEMP_VERSION_NAME!
