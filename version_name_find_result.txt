@@ -1,0 +1,3 @@
+
+---------- ANDROIDMANIFEST.XML
+    android:versionName="0.20.8" >
