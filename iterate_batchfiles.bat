@@ -9,4 +9,4 @@ for /f "delims=" %%i in ('dir /s /b *.%SUFFIX%') do (
 for /f "delims=" %%i in ('dir /s /b *.%SUFFIX%') do (
   echo %%~i
 )
- pause
+pause

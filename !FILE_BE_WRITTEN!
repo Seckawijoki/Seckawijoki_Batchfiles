@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.minitech.miniworld.test"
-    android:versionCode="6408"
-    android:versionName="0.25.8" >
+    package="com.minitech.miniworld"
+    android:versionCode="5128"
+    android:versionName="0.20.8" >
 
 	<uses-sdk
         android:minSdkVersion="11"
@@ -11,9 +11,10 @@
 	<uses-feature
 	    android:glEsVersion="0x00020000"
 	    android:required="true" />
-
+	
 	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -21,17 +22,9 @@
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.VIBRATE" />	
 	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-	<uses-permission android:name="android.permission.GET_TASK" />
-  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-  <uses-permission android:name="android.permission.RECORD_AUDIO" />   
+	<uses-permission android:name="android.permission.GET_TASK" />	
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.INTERNET" />
 	
 	<!-- code injection begin [manifest_node] -->
 
@@ -67,27 +60,19 @@
 	<uses-permission android:name="android.permission.INTERNET"/>
 	<!-- GVoiceSDk end -->
 	
-	<!-- BuglySDK begin -->
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.READ_LOGS"/>
-	<!-- BuglySDK end -->
-	
 	<uses-permission android:name="android.permission.CAMERA"/>
 	<uses-feature android:name="android.hardware.camera.any"/>
 	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
 	<uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
 
 	<!-- code injection end [manifest_node] -->
-
+			
     <application
         android:allowBackup="false"
-        android:name="org.appplay.lib.AppPlayApplication"
+		android:name="org.appplay.lib.AppPlayApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
 			android:name="com.minitech.miniworld.SplashScreenActivity"
             android:label="@string/app_name"
@@ -98,7 +83,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-			<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -120,7 +105,7 @@
             </intent-filter>
         </activity>
         
-		<!-- talkingdata --><!-- 	
+		<!-- talkingdata --><!--
 		<service
             android:name="com.gametalkingdata.push.service.PushService"
             android:process=":push"
@@ -147,32 +132,10 @@
                 <action android:name="com.talkingdata.notification.click" />
                 <action android:name="com.talkingdata.message.click" />
             </intent-filter>
-        </receiver>     
-        --><!--talkingdata end-->
+        </receiver>
+		--><!--talkingdata end-->
         
-        <!--alipay -->
-        <activity
-		    android:name="com.alipay.sdk.app.H5PayActivity"
-		    android:configChanges="orientation|keyboardHidden|navigation"
-		    android:exported="false"
-		    android:screenOrientation="behind">
-		</activity>
-		<activity
-		    android:name="com.alipay.sdk.auth.AuthActivity"
-		    android:configChanges="orientation|keyboardHidden|navigation"
-		    android:exported="false"
-		    android:screenOrientation="behind">
-		</activity>
-        <!--alipay end-->
-        
-        <!-- WeChat -->
-        	<activity
-			    android:name="com.minitech.miniworld.wxapi.WXPayEntryActivity"
-			    android:exported="true"
-			    android:launchMode="singleTop"/>
-        <!-- WeChat End -->
-        
-		<!-- 添加应用自身的灯塔appkey，如0I000LT6GW1YGCP7-->
+        <!-- 添加应用自身的灯塔appkey，如0I000LT6GW1YGCP7-->
 		<meta-data
 		    android:name="APPKEY_DENGTA"
 		    android:value="1ME88M6P8U1A2XC0" />
@@ -242,20 +205,7 @@
             </intent-filter>
         </activity>
 
-		<!-- code injection end [application_node] -->		
-		<!-- qqwalletSDK -->
-		<activity
-            android:name="org.appplay.platformsdk.QQWalletCallbackActivity"
-            android:launchMode="singleTop"
-            android:exported="true" >
-            <intent-filter>
-               <action android:name="android.intent.action.VIEW" />
-               <category android:name="android.intent.category.BROWSABLE"/> 
-               <category android:name="android.intent.category.DEFAULT"/> 
-               <data android:scheme="qwallet1105308248"/>
-            </intent-filter>
-        </activity>
-		<!--qqwalletSDK end-->
+		<!-- code injection end [application_node] -->
         
         <!-- meta-data define val for app-->                
         <meta-data
@@ -296,27 +246,11 @@
       	    
         <meta-data
       	    android:name="apiid"
-      	    android:value="99"/>
+      	    android:value="1"/>
         <meta-data
       	    android:name="tppay"
       	    android:value="true"/>
-        
-        <meta-data
-          android:name="BUGLY_APPID"
-          android:value="6197f1dba3" />
-      <!-- 配置APP版本号 -->
-      <meta-data
-          android:name="BUGLY_APP_VERSION"
-          android:value="f2a40e80-d97f-4d16-bb1c-cfe7ce6edf2c" />
-      <!-- 配置APP渠道号 -->
-      <meta-data
-          android:name="BUGLY_APP_CHANNEL"
-          android:value="1.0" />
-      <!-- 配置Bugly调试模式（true或者false）-->
-      <meta-data
-          android:name="BUGLY_ENABLE_DEBUG"
-          android:value="true" />
-			
+		
 		<meta-data android:name="android.max_aspect" android:value="2.1" />
     </application>
 </manifest>
