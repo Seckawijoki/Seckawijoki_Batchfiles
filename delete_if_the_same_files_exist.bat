@@ -18,7 +18,7 @@ for /f "delims=" %%i in ('dir /b %DIR1%\*.%SUFFIX%') do (
     if %%i == %%j (
 	  echo %DIR1% contains %%i, start to delete %DIR2%\%%j.
 	  :: 必须加上路径来指定%%j参数指定的文件
-	  del %DIR2%\%%j
+	  del %%j
 	) else (
 	  echo ----- continue -----
 	)
@@ -26,3 +26,4 @@ for /f "delims=" %%i in ('dir /b %DIR1%\*.%SUFFIX%') do (
 )
 
 del /Q %DIR1%
+del /Q %DIR2%
