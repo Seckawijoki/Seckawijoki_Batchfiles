@@ -8,6 +8,7 @@ set fileApk=%fileApkName%.%suffixApk%
 set fileZip=%fileApkName%.%suffixZip%
 set fileDexClasses=classes.dex
 set fileJarDecompiled=%projectName%-dex2jar.jar
+set fileErrorZip=classes-error.zip
 set dirUnzip=%fileApkName%
 set dirDecompiledJarFiles=decompiled_jar_files
 set pathApk=F:\Android_Studio_projects\Seckawijoki_ANDROID_TEST\app\build\outputs\apk\demo\debug\%fileApk%
@@ -15,6 +16,7 @@ set pathApk=F:\Android_Studio_projects\Seckawijoki_ANDROID_TEST\app\build\output
 copy %pathApk% .\%fileZip%
 unzip %fileZip% -d %dirUnzip%
 if not exist %dirDecompiledJarFiles% mkdir %dirDecompiledJarFiles%
-echo A | d2j-dex2jar %dirUnzip%\%fileDexClasses% --force --output %dirDecompiledJarFiles%\%fileJarDecompiled%
+echo A | d2j-dex2jar %dirUnzip%\%fileDexClasses% --not-handle-exception --force --output %dirDecompiledJarFiles%\%fileJarDecompiled%
 rd /s /q %dirUnzip%
 del /q %fileZip%
+del /q %fileErrorZip%
