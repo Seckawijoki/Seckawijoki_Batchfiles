@@ -11,4 +11,4 @@ set system=local
 set user=Seckawijoki
 set password=0218
 
-schtasks /create /sc %schedule% /mo %modifier% /tn %taskName% /tr %taskRun% /st %startTime% /sd %startDate% /s %system% /u %user% /p %password%
+schtasks /create /sc %schedule% /mo %modifier% /tn %taskName% /tr %taskRun% /st %startTime% /sd %startDate% /u %user% /p %password%
