@@ -1,6 +1,7 @@
 @echo off
 
 set fileName=__common_git_pull.sh
+copy %fileName% f:\batch_files\%fileName%
 copy %fileName% f:\cpp_files\%fileName%
 copy %fileName% f:\lua_files\%fileName%
 copy %fileName% f:\working_notes_of_Miniworld\%fileName%
