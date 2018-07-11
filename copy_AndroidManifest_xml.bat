@@ -1,5 +1,5 @@
 @echo off
-set android_manifest_xml_file=AndroidManifest.xml
-if not exist %android_manifest_xml_file% (
-  copy F:\trunk\Miniworld_projects\client\AppPlay\Proj.Android.MiniBeta\%android_manifest_xml_file% .\%android_manifest_xml_file%
+set fileAndroidManifestXml=AndroidManifest.xml
+if not exist %fileAndroidManifestXml% (
+  copy F:\trunk\Miniworld_projects\client\AppPlay\Proj.Android.MiniBeta\%fileAndroidManifestXml% .\%fileAndroidManifestXml%
 )
