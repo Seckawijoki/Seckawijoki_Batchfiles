@@ -62,7 +62,7 @@ public class ChangeAndroidManifestXml{
         int rightIndex = line.lastIndexOf(QUOTE);
         System.out.println("ChangeAndroidManifestXml.main(): leftIndex = " + leftIndex);
         System.out.println("ChangeAndroidManifestXml.main(): rightIndex = " + rightIndex);
-        String newVersionCodeLine = line.substring(0, leftIndex+1) + versionCode + line.substring(rightIndex) + "\n\t";
+        String newVersionCodeLine = line.substring(0, leftIndex+1) + versionCode + line.substring(rightIndex) + '\n';
         System.out.println("ChangeAndroidManifestXml.main(): newVersionCodeLine = " + newVersionCodeLine);
         writer.write(newVersionCodeLine);
         hasWrittenVersionCode = true;
@@ -71,14 +71,13 @@ public class ChangeAndroidManifestXml{
         int rightIndex = line.lastIndexOf(QUOTE);
         System.out.println("ChangeAndroidManifestXml.main(): leftIndex = " + leftIndex);
         System.out.println("ChangeAndroidManifestXml.main(): rightIndex = " + rightIndex);
-        String newVersionNameLine = line.substring(0, leftIndex+1) + versionName + line.substring(rightIndex) + "\n\t";
+        String newVersionNameLine = line.substring(0, leftIndex+1) + versionName + line.substring(rightIndex) + '\n';
         System.out.println("ChangeAndroidManifestXml.main(): newVersionNameLine = " + newVersionNameLine);
         writer.write(newVersionNameLine);
         hasWrittenVersionName = true;
       } else {
         writer.write(line);
         writer.write('\n');
-        writer.write('\t');
       }
     }
     reader.close();

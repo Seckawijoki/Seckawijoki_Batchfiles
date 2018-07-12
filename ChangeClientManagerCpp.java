@@ -31,7 +31,7 @@ public class ChangeClientManagerCpp{
         int rightIndex = line.lastIndexOf(QUOTE);
         System.out.println("ChangeClientManagerCpp.main(): leftIndex = " + leftIndex);
         System.out.println("ChangeClientManagerCpp.main(): rightIndex = " + rightIndex);
-        String newVersionNameLine = line.substring(0, leftIndex+1) + versionName + line.substring(rightIndex) + "\n\t";
+        String newVersionNameLine = line.substring(0, leftIndex+1) + versionName + line.substring(rightIndex) + '\n';
         System.out.println("ChangeClientManagerCpp.main(): oldLine = " + line);
         System.out.println("ChangeClientManagerCpp.main(): newLine = " + newVersionNameLine);
         writer.write(newVersionNameLine);
@@ -39,7 +39,6 @@ public class ChangeClientManagerCpp{
       } else {
         writer.write(line);
         writer.write('\n');
-        writer.write('\t');
       }
     }
     reader.close();
