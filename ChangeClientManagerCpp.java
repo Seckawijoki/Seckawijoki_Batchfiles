@@ -1,6 +1,10 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,8 +25,8 @@ public class ChangeClientManagerCpp{
     System.out.println("ChangeClientManagerCpp.main(): readFile = " + readFile);
     System.out.println("ChangeClientManagerCpp.main(): writtenFile = " + writtenFile);
     System.out.println("ChangeClientManagerCpp.main(): versionName = " + versionName);
-    BufferedReader reader = new BufferedReader(new FileReader(readFile));
-    BufferedWriter writer = new BufferedWriter(new FileWriter(writtenFile));
+    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writtenFile), "UTF-8"));
     String line;
     boolean hasWritten = false;
     while ((line = reader.readLine()) != null){

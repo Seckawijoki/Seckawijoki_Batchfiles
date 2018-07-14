@@ -42,8 +42,8 @@ public class ChangeAndroidManifestXml{
     System.out.println("ChangeAndroidManifestXml.main(): readFile = " + readFile);
     System.out.println("ChangeAndroidManifestXml.main(): writtenFile = " + writtenFile);
     System.out.println("ChangeAndroidManifestXml.main(): versionName = " + versionName);
-    BufferedReader reader = new BufferedReader(new FileReader(readFile));
-    BufferedWriter writer = new BufferedWriter(new FileWriter(writtenFile));
+    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writtenFile), "UTF-8"));
     int []versionDigits = splitVersionName(versionName);
     if (versionDigits == null || versionDigits.length < 3){
       System.out.println("ChangeAndroidManifestXml.main(): Invalid version name: " + versionName);
