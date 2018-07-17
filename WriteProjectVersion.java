@@ -80,10 +80,10 @@ public class WriteProjectVersion {
         int rightIndex = mReadLine.lastIndexOf(QUOTE);
         System.out.println("changeClientManageCpp(): leftIndex = " + leftIndex);
         System.out.println("changeClientManageCpp(): rightIndex = " + rightIndex);
-        String newVersionNameLine = mReadLine.substring(0, leftIndex+1) + versionName + mReadLine.substring(rightIndex) + '\n';
+        String newLine = mReadLine.substring(0, leftIndex+1) + versionName + mReadLine.substring(rightIndex) + '\n';
         System.out.println("changeClientManageCpp(): oldLine = " + mReadLine);
-        System.out.println("changeClientManageCpp(): newLine = " + newVersionNameLine);
-        mWriter.write(newVersionNameLine);
+        System.out.println("changeClientManageCpp(): newLine = " + newLine);
+        mWriter.write(newLine);
         hasWritten = true;
       } else {
         mWriter.write(mReadLine);
@@ -121,9 +121,9 @@ public class WriteProjectVersion {
         System.out.println("changeAndroidManifestXml(): leftIndex = " + leftIndex);
         System.out.println("changeAndroidManifestXml(): rightIndex = " + rightIndex);
         System.out.println("changeAndroidManifestXml(): oldLine = " + mReadLine);
-        String newVersionCodeLine = mReadLine.substring(0, leftIndex+1) + versionCode + mReadLine.substring(rightIndex) + '\n';
-        System.out.println("changeAndroidManifestXml(): newVersionCodeLine = " + newVersionCodeLine);
-        mWriter.write(newVersionCodeLine);
+        String newLine = mReadLine.substring(0, leftIndex+1) + versionCode + mReadLine.substring(rightIndex) + '\n';
+        System.out.println("changeAndroidManifestXml(): newLine = " + newLine);
+        mWriter.write(newLine);
         hasWrittenVersionCode = true;
       } else if (hasWrittenVersionName == false && mReadLine.contains(KEY_LINE_VERSION_NAME)) {
         int leftIndex = mReadLine.indexOf(QUOTE);
@@ -131,9 +131,9 @@ public class WriteProjectVersion {
         System.out.println("changeAndroidManifestXml(): leftIndex = " + leftIndex);
         System.out.println("changeAndroidManifestXml(): rightIndex = " + rightIndex);
         System.out.println("changeAndroidManifestXml(): oldLine = " + mReadLine);
-        String newVersionNameLine = mReadLine.substring(0, leftIndex+1) + versionName + mReadLine.substring(rightIndex) + '\n';
-        System.out.println("main(): newVersionNameLine = " + newVersionNameLine);
-        mWriter.write(newVersionNameLine);
+        String newLine = mReadLine.substring(0, leftIndex+1) + versionName + mReadLine.substring(rightIndex) + '\n';
+        System.out.println("changeAndroidManifestXml(): newLine = " + newLine);
+        mWriter.write(newLine);
         hasWrittenVersionName = true;
       } else if (hasChangedBuglyEnableDebug == false && mReadLine.contains(KEY_LINE_BUGLY_ENALBE_DEBUG)) {
         mWriter.write(mReadLine);
@@ -161,8 +161,8 @@ public class WriteProjectVersion {
       System.out.println("main(): args == null");
       return;
     }
-    if (args.length <= 3){
-      System.out.println("main(): Length of arguments less than 3.");
+    if (args.length < 4){
+      System.out.println("main(): Length of arguments less than 4.");
       return;
     }
     File readFile = new File(args[0]);
@@ -171,10 +171,10 @@ public class WriteProjectVersion {
     String arg3 = args[3];
     String readCharset = DEFAULT_READ_CHARSET;
     String writeCharset = DEFAULT_WRITE_CHARSET;
-    if (args[4] != null || !args[4].equals("")){
+    if (args.length >= 5 && (args[4] != null || !args[4].equals("")) ){
       readCharset = args[4];
     }
-    if (args[5] != null || !args[5].equals("")){
+    if (args.length >= 6 && (args[5] != null || !args[5].equals("")) ){
       writeCharset = args[5];
     }
     System.out.println("main(): readFile = " + readFile);
