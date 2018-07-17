@@ -27,29 +27,5 @@ public class ChangeClientManagerCpp{
     System.out.println("ChangeClientManagerCpp.main(): versionName = " + versionName);
     BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writtenFile), "UTF-8"));
-    String line;
-    boolean hasWritten = false;
-    while ((line = reader.readLine()) != null){
-      if (hasWritten == false && line.contains(KEY_LINE_S_CLIENT_VERSION)){
-        int leftIndex = line.indexOf(QUOTE);
-        int rightIndex = line.lastIndexOf(QUOTE);
-        System.out.println("ChangeClientManagerCpp.main(): leftIndex = " + leftIndex);
-        System.out.println("ChangeClientManagerCpp.main(): rightIndex = " + rightIndex);
-        String newVersionNameLine = line.substring(0, leftIndex+1) + versionName + line.substring(rightIndex) + '\n';
-        System.out.println("ChangeClientManagerCpp.main(): oldLine = " + line);
-        System.out.println("ChangeClientManagerCpp.main(): newLine = " + newVersionNameLine);
-        writer.write(newVersionNameLine);
-        hasWritten = true;
-      } else {
-        writer.write(line);
-        writer.write('\n');
-      }
-    }
-    reader.close();
-    writer.close();
-    if (hasWritten)
-      System.out.println("ChangeClientManagerCpp.main(): Writing finished.");
-    else 
-      System.out.println("ChangeClientManagerCpp.main(): Writing failed.");
   }
 }

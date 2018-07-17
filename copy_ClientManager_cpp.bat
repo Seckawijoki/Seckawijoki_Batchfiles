@@ -1,5 +1,2 @@
 @echo off
-set fileClientManagerCpp=ClientManager.Cpp
-if not exist %fileClientManagerCpp% (
-  copy F:\trunk\Miniworld_projects\client\iworld\%fileClientManagerCpp% .\%fileClientManagerCpp%
-)
+ copy F:\trunk\env1\client\iworld\ClientManager.cpp .\ClientManager.cpp

@@ -9,8 +9,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 public class ChangeAndroidManifestXml{
+  private static final String DEFAULT_READ_CHARSET = "GBK";
+  private static final String DEFAULT_WRITE_CHARSET = "GBK";
   private static final String KEY_LINE_VERSION_CODE = "android:versionCode=";
   private static final String KEY_LINE_VERSION_NAME = "android:versionName=";
+  private static final String KEY_LINE_BUGLY_ENALBE_DEBUG = "BUGLY_ENABLE_DEBUG";
   private static final char QUOTE = '"';
   private static final char POINT = '.';
   private static int[] splitVersionName(String versionName){
@@ -36,14 +39,23 @@ public class ChangeAndroidManifestXml{
     if (args.length <= 2){
       System.out.println("ChangeAndroidManifestXml.main(): Length of arguments less than 2.");
     }
+    String readCharset = DEFAULT_READ_CHARSET;
+    String writeCharset = DEFAULT_WRITE_CHARSET;
+    if (args[3] != null || !args[3].equals("")){
+      readCharset = args[3];
+    }
+    if (args[4] != null || !args[4].equals("")){
+      writeCharset = args[4];
+    }
     File readFile = new File(args[0]);
     File writtenFile = new File(args[1]);
     String versionName = new String(args[2]);
     System.out.println("ChangeAndroidManifestXml.main(): readFile = " + readFile);
     System.out.println("ChangeAndroidManifestXml.main(): writtenFile = " + writtenFile);
     System.out.println("ChangeAndroidManifestXml.main(): versionName = " + versionName);
-    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
-    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writtenFile), "UTF-8"));
+    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), readCharset));
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writtenFile), writeCharset));
+    
     int []versionDigits = splitVersionName(versionName);
     if (versionDigits == null || versionDigits.length < 3){
       System.out.println("ChangeAndroidManifestXml.main(): Invalid version name: " + versionName);
@@ -53,8 +65,10 @@ public class ChangeAndroidManifestXml{
     String line;
     boolean hasWrittenVersionCode = false;
     boolean hasWrittenVersionName = false;
+    boolean hasChangedBuglyEnableDebug = false;
+    
     while ((line = reader.readLine()) != null){
-      if (hasWrittenVersionCode == false || hasWrittenVersionName == false){
+      if (line.startsWith("<!-")){
         System.out.println("ChangeAndroidManifestXml.main(): line = " + line);
       }
       if (hasWrittenVersionCode == false && line.contains(KEY_LINE_VERSION_CODE)){
@@ -62,6 +76,7 @@ public class ChangeAndroidManifestXml{
         int rightIndex = line.lastIndexOf(QUOTE);
         System.out.println("ChangeAndroidManifestXml.main(): leftIndex = " + leftIndex);
         System.out.println("ChangeAndroidManifestXml.main(): rightIndex = " + rightIndex);
+        System.out.println("ChangeAndroidManifestXml.main(): oldLine = " + line);
         String newVersionCodeLine = line.substring(0, leftIndex+1) + versionCode + line.substring(rightIndex) + '\n';
         System.out.println("ChangeAndroidManifestXml.main(): newVersionCodeLine = " + newVersionCodeLine);
         writer.write(newVersionCodeLine);
@@ -71,10 +86,21 @@ public class ChangeAndroidManifestXml{
         int rightIndex = line.lastIndexOf(QUOTE);
         System.out.println("ChangeAndroidManifestXml.main(): leftIndex = " + leftIndex);
         System.out.println("ChangeAndroidManifestXml.main(): rightIndex = " + rightIndex);
+        System.out.println("ChangeAndroidManifestXml.main(): oldLine = " + line);
         String newVersionNameLine = line.substring(0, leftIndex+1) + versionName + line.substring(rightIndex) + '\n';
         System.out.println("ChangeAndroidManifestXml.main(): newVersionNameLine = " + newVersionNameLine);
         writer.write(newVersionNameLine);
         hasWrittenVersionName = true;
+      } else if (hasChangedBuglyEnableDebug == false && line.contains(KEY_LINE_BUGLY_ENALBE_DEBUG)) {
+        writer.write(line);
+        writer.write('\n');
+        line = reader.readLine();
+        String newLine = line.replace("true", "false");
+        System.out.println("ChangeAndroidManifestXml.main(): oldLine = " + line);
+        System.out.println("ChangeAndroidManifestXml.main(): newLine = " + newLine);
+        writer.write(newLine);
+        writer.write('\n');
+        hasChangedBuglyEnableDebug = true;
       } else {
         writer.write(line);
         writer.write('\n');
@@ -82,7 +108,7 @@ public class ChangeAndroidManifestXml{
     }
     reader.close();
     writer.close();
-    if (hasWrittenVersionCode && hasWrittenVersionName)
+    if (hasWrittenVersionCode && hasWrittenVersionName  && hasChangedBuglyEnableDebug)
       System.out.println("ChangeAndroidManifestXml.main(): Writing finished.");
     else 
       System.out.println("ChangeAndroidManifestXml.main(): Writing failed.");

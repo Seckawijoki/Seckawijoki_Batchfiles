@@ -1,6 +1,6 @@
 @echo off
 
-set mApkVersionName=0.27.0
+set mApkVersionName=0.27.3
 
 set fileClientManagerCpp=ClientManager.cpp
 call copy_ClientManager_cpp.bat
