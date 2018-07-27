@@ -1,39 +1,58 @@
 @echo off
 
-echo ---------- write version to ClientManager.cpp ----------
-cd %PATH_IWORLD%
+set changeAndroidManifestXml=0
+set changeClientManagerCpp=1
+set changeClientPrerequisitesH=2
 
-set javaFileChangeClientManagerCpp=ChangeClientManagerCpp
-set fileClientManagerCpp=ClientManager.cpp
-set fileWritten=ClientManager_written_by_java.cpp
-
-copy  %fileClientManagerCpp% %fileWritten%
-copy %PATH_AUTOMATIC_BUILD%\%javaFileChangeClientManagerCpp%.java %javaFileChangeClientManagerCpp%.java
-
-javac %javaFileChangeClientManagerCpp%.java
-java %javaFileChangeClientManagerCpp% %fileClientManagerCpp% %fileWritten% %mApkVersionName%
-
-copy %fileWritten% %fileClientManagerCpp%
-
-del /q %fileWritten%
-del /q %javaFileChangeClientManagerCpp%.java
-del /q %javaFileChangeClientManagerCpp%.class
+set javaWritePojectVersion=WriteProjectVersion
+set fileWritten=project_file_written_by_java
 
 echo ---------- write version to AndroidManifest.xml ----------
 cd %mPathCurrentProjAndroid%
 
-set javaFileChangeAndroidManifestXml=ChangeAndroidManifestXml
-set fileAndroidManifestXml=AndroidManifest.xml
-set fileWritten=AndroidManifest_written_by_java.xml
+set fileRead=AndroidManifest.xml
 
-copy  %fileAndroidManifestXml% %fileWritten%
-copy %PATH_AUTOMATIC_BUILD%\%javaFileChangeAndroidManifestXml%.java %javaFileChangeAndroidManifestXml%.java
+copy  %fileRead% %fileWritten%
+copy %PATH_AUTOMATIC_BUILD%\%DIR_SUB_FILES%\%javaWritePojectVersion%.java %javaWritePojectVersion%.java
 
-javac %javaFileChangeAndroidManifestXml%.java
-java %javaFileChangeAndroidManifestXml% %fileAndroidManifestXml% %fileWritten% %mApkVersionName%
+javac %javaWritePojectVersion%.java
+java %javaWritePojectVersion% %fileRead% %fileWritten% %changeAndroidManifestXml% %mApkVersionName% UTF-8 UTF-8
 
-copy %fileWritten% %fileAndroidManifestXml%
+copy %fileWritten% %fileRead%
+del /q %fileWritten%
+del /q %javaWritePojectVersion%.java
+del /q *.class
+
+echo ---------- write version to ClientManager.cpp ----------
+cd %PATH_IWORLD%
+
+set fileRead=ClientManager.cpp
+
+copy  %fileRead% %fileWritten%
+copy %PATH_AUTOMATIC_BUILD%\%DIR_SUB_FILES%\%javaWritePojectVersion%.java %javaWritePojectVersion%.java
+
+javac %javaWritePojectVersion%.java
+java %javaWritePojectVersion% %fileRead% %fileWritten% %changeClientManagerCpp% %mApkVersionName%  GB2312 GB2312
+
+copy %fileWritten% %fileRead%
+del /q %fileWritten%
+del /q %javaWritePojectVersion%.java
+del /q *.class
+
+if defined mRelease if "%mRelease%" == "true" (
+  echo ---------- annotate "#define IWORLD_DEV_BUILD" in ClientPrerequisites.h ----------
+  cd %PATH_IWORLD%
+
+  set fileRead=ClientPrerequisites.h
+
+  copy  %fileRead% %fileWritten%
+  copy %PATH_AUTOMATIC_BUILD%\%DIR_SUB_FILES%\%javaWritePojectVersion%.java %javaWritePojectVersion%.java
+
+  javac %javaWritePojectVersion%.java
+  java %javaWritePojectVersion% %fileRead% %fileWritten% %changeClientPrerequisitesH% true  GB2312 GB2312
+  copy %fileWritten% %fileRead%
+)
 
 del /q %fileWritten%
-del /q %javaFileChangeAndroidManifestXml%.java
-del /q %javaFileChangeAndroidManifestXml%.class
+del /q %javaWritePojectVersion%.java
+del /q *.class

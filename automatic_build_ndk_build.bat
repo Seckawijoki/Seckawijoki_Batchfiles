@@ -13,8 +13,6 @@ REM LOCAL_SHARED_LIBRARIES  := fmod
 REM LOCAL_SHARED_LIBRARIES += libGCloudVoice
 REM LOCAL_SHARED_LIBRARIES += libcubehawk
 
-set mPathProjAndroidNdkBuild=%mPathCurrentProjAndroid%
-
 %DRIVE%
 
 rem --------- UITolua.pkg ----------
@@ -30,17 +28,19 @@ echo ---------- build ClientToLuaM.pkg finished ----------
 rem ---------- ndk-build start -----------
 cd %mPathProjAndroidNdkBuild%
 
-del /s /q obj\local\%mNDKBuildApi%\*
+if not defined mRemainPreviousSoFiles if exist obj\local\%mNdkBuildAbi% del /s /q obj\local\%mNdkBuildAbi%\*
 
 set fileAndroidMk=Android_without_upward_path.mk
-if not exist jni\%fileAndroidMk% copy %PATH_AUTOMATIC_BUILD%\%fileAndroidMk% jni\%fileAndroidMk%
+if not exist jni\%fileAndroidMk% copy %PATH_AUTOMATIC_BUILD%\%DIR_SUB_FILES%\%fileAndroidMk% jni\%fileAndroidMk%
+
 
 set engineRootLocal=%DRIVE%/%DIR_TRUNK%/%DIR_ENV_1%/%DIR_CLIENT%
 set ndkModulePath=%DRIVE%/%DIR_TRUNK%/%DIR_ENV_1%/%DIR_CLIENT%
-
 echo ---------- ndk-build start -----------
 set mStartTimeNdkBuild=%time%
-%PATH_NDK_BUILD_CMD% NDK_PROJECT_PATH=. NDK_LIBS_OUT=%DIR_NDK_BUILD_OUT% APP_BUILD_SCRIPT:=jni/%fileAndroidMk% NDK_APPLICATION_MK=jni/Application.mk ENGINE_ROOT_LOCAL=%engineRootLocal% NDK_MODULE_PATH=%ndkModulePath% APP_ABI:=%mNDKBuildApi% APP_SHORT_COMMANDS:=true
+set bNdkBuildFinished=false
+%PATH_NDK_BUILD_CMD% NDK_PROJECT_PATH=. NDK_LIBS_OUT=%DIR_NDK_BUILD_OUT% APP_BUILD_SCRIPT:=jni/%fileAndroidMk% NDK_APPLICATION_MK=jni/Application.mk ENGINE_ROOT_LOCAL=%engineRootLocal% NDK_MODULE_PATH=%ndkModulePath% APP_ABI:=%mNdkBuildAbi% APP_SHORT_COMMANDS:=true
+set bNdkBuildFinished=true
 rem --------- ndk-build end ----------
 rem  Do not do anything after ndk build in this batch script.  -- by Author
 
