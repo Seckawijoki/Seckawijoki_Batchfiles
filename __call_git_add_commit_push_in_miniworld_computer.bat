@@ -13,6 +13,7 @@ set aDirs=batch_files bash_files cpp_files lua_files working_notes_of_Miniworld
 f:
 echo Copy desktop files to working note directory..
 call f:\batch_files\__copy_desktop_files_to_working_notes.bat
+if exist f:\cpp_files\*.exe del /q /s f:\cpp_files\*.exe
 
 for %%i in (%aDirs%) do (
   cd %pathBase%\%%i
