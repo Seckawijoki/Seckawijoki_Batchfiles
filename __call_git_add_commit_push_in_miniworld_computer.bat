@@ -8,7 +8,7 @@ git config --global user.email "seckawijoki@gmail.com"
 git config --global user.name "seckawijoki@gmail.com"
 
 set pathBase=f:
-set aDirs=batch_files bash_files cpp_files lua_files working_notes_of_Miniworld
+set aDirs=batch_files cpp_files working_notes_of_Miniworld
 
 f:
 echo Copy desktop files to working note directory..
