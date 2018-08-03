@@ -18,7 +18,7 @@ if exist f:\cpp_files\*.exe del /q /s f:\cpp_files\*.exe
 for %%i in (%aDirs%) do (
   cd %pathBase%\%%i
   echo Running git pushes in %%i:
-  copy %pathGitPush% %batchGitPush%
+  if not "%%i" == "batch_files" copy %pathGitPush% %batchGitPush%
   call %batchGitPush%
 )
 
