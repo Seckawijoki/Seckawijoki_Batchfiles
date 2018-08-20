@@ -1,7 +1,7 @@
 @echo off
 
 set pathSource=C:\Users\Administrator\Desktop\
-set pathDestination=F:\working_notes_of_Miniworld\
+set pathDestination=F:\Miniworld_workspace_solutions\
 set pathAutomaticBuild=F:\trunk\env1\client\AppPlay\ApkBuilderScripts\automatic_build
 
 
