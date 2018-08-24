@@ -1,4 +1,0 @@
-
----------- ANDROIDMANIFEST.XML
-    android:versionCode="6408"
-    android:versionName="0.25.8" >

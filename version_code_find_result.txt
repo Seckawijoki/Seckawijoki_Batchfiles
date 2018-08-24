@@ -1,3 +1,0 @@
-
----------- ANDROIDMANIFEST.XML
-    android:versionCode="5128"

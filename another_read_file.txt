@@ -1,3 +1,0 @@
-.1row1col 1row2col 1row3col  
-.2row1col 2row2col 2row3col  
-3row1col 3row2col 3row3col  

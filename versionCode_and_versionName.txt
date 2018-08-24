@@ -1,3 +1,0 @@
-
----------- WRITTEN_ANDROIDMANIFEST.XML
-    android:versionName="1145.28886.16850" >

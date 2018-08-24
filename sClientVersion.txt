@@ -1,3 +1,0 @@
-
----------- CLIENTMANAGER.CPP
-static const char *sClientVersion = "0.26.2";
