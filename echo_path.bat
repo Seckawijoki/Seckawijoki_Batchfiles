@@ -1,3 +1,3 @@
 @echo off
-echo %0/
+echo %0\
 pause
