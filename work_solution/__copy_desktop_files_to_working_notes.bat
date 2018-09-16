@@ -3,7 +3,7 @@
 set pathSource=C:\Users\Administrator\Desktop\
 set pathDestination=F:\Miniworld_workspace_solutions\
 set pathAutomaticBuild=F:\trunk\env1\client\AppPlay\ApkBuilderScripts\automatic_build
-
+set pathCommitment=F:\trunk\env1\client\AppPlay\ApkBuilderScripts\commitment
 
 f:
 cd %pathDestination%
@@ -13,6 +13,7 @@ if not exist shortcuts mkdir shortcuts
 if not exist sub_codes mkdir sub_codes
 
 if exist %pathSource%\*.bat copy %pathSource%\*.bat batch_scripts\
+echo a | xcopy /s /e /a /c /q %pathCommitment%\* batch_scripts\
 
 if exist %pathSource%\*.docx copy %pathSource%\*.docx note_documents\
 if exist %pathSource%\*.xlsx copy %pathSource%\*.xlsx note_documents\
