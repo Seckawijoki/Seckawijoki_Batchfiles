@@ -1,9 +1,10 @@
 @echo off
 setlocal EnableDelayedExpansion
-dir /od *.*
-for /f "skip=4 tokens=4" %%i in ('dir /o-d *.*') do (
+dir /od *.* /b
+for /f  %%i in ('dir /o-d *.* /b') do (
   set filename=%%i
   goto :end
 )
 :end
+echo.
 echo The latest file is !filename!
