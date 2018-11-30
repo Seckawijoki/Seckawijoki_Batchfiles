@@ -1,1 +1,3 @@
-for /f "delims==" %%a in ('set') do if /i %%a neq path set %%a=
+
+set mDirCurrentProjAndroid=proj.AndroidStudio.Blockark
+echo %mDirCurrentProjAndroid:~1,17%
