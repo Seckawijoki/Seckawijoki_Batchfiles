@@ -1,4 +1,5 @@
 @echo off
+chcp 65001
 
 set year=%date:~0,4%
 set month=%date:~5,2%
