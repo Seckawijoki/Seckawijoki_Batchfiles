@@ -1,8 +1,8 @@
-@echo on
+@echo off
 chcp 65001
 set dn=d
-
-for /f "tokens=2* delims=:" %%a in ('fsutil volume diskfree %~d0') do (
+fsutil volume diskfree %~d0\
+for /f "tokens=2* delims=()" %%a in ('fsutil volume diskfree %~d0\') do (
     set availableSpace=%%a
 )
 echo availableSpace = %availableSpace% B
