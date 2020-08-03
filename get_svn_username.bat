@@ -24,5 +24,3 @@ if "!svnAuthUsername!" == "" (
 )
 :end_get_svn_cache_auth_username
 echo cache : svnAuthUsername = !svnAuthUsername!
-
-echo end
