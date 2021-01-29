@@ -1,0 +1,22 @@
+------------------------------------------------------------------------
+Credential kind: svn.simple
+Authentication realm: <http://10.0.0.3:3000> VisualSVN Server
+Password cache: wincrypt
+Password: [not shown]
+Username: pengdapu
+
+------------------------------------------------------------------------
+Credential kind: svn.simple
+Authentication realm: <http://10.0.0.5:3000> VisualSVN Server
+Password cache: wincrypt
+Password: [not shown]
+Username: pengdapu
+
+------------------------------------------------------------------------
+Credential kind: svn.simple
+Authentication realm: <http://183.62.194.66:5000> VisualSVN Server
+Password cache: wincrypt
+Password: [not shown]
+Username: pengdapu
+
+Credentials cache in 'C:\Users\Administrator\AppData\Roaming\Subversion' contains 3 credentials

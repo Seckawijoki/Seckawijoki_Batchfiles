@@ -3,7 +3,7 @@ setlocal EnableDelayedExpansion
 
 set fileSvnAuth=svn_auth
 REM @echo on
-svnn auth>%fileSvnAuth%
+svn auth>%fileSvnAuth%
 set /p svnAuthUsername=<%fileSvnAuth%
 for /f "eol=- tokens=2 skip=5" %%i in (%fileSvnAuth%) do (
   set svnAuthUsername=%%i
@@ -24,3 +24,5 @@ if "!svnAuthUsername!" == "" (
 )
 :end_get_svn_cache_auth_username
 echo cache : svnAuthUsername = !svnAuthUsername!
+
+REM echo !svnAuthUsername! > output_file
